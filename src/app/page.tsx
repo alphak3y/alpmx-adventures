@@ -1,0 +1,33 @@
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
+import RentalCategories from "@/components/RentalCategories";
+import FeaturedBikes from "@/components/FeaturedBikes";
+import HowItWorks from "@/components/HowItWorks";
+import VideoFeature from "@/components/VideoFeature";
+import PickupLocations from "@/components/PickupLocations";
+import CabinBooking from "@/components/CabinBooking";
+import Testimonials from "@/components/Testimonials";
+import CTABanner from "@/components/CTABanner";
+import Footer from "@/components/Footer";
+
+export default function Home() {
+  return (
+    <>
+      <Navbar />
+      <main id="main-content">
+        <Hero />
+        <TrustBar />
+        <RentalCategories />
+        <FeaturedBikes />
+        <HowItWorks />
+        <VideoFeature />
+        <PickupLocations />
+        <CabinBooking />
+        <Testimonials />
+        <CTABanner />
+      </main>
+      <Footer />
+    </>
+  );
+}
