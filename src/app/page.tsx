@@ -10,19 +10,29 @@ import CabinBooking from "@/components/CabinBooking";
 import Testimonials from "@/components/Testimonials";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
+import { getInventory, getPickupLocations } from "./_data/fleet";
 
-export default function Home() {
+export const revalidate = 300; // Revalidate every 5 minutes
+
+export default async function Home() {
+  const [inventory, locations] = await Promise.all([
+    getInventory(),
+    getPickupLocations(),
+  ]);
+
+  const { items, categories } = inventory;
+
   return (
     <>
       <Navbar />
       <main id="main-content">
         <Hero />
         <TrustBar />
-        <RentalCategories />
-        <FeaturedBikes />
+        <RentalCategories categories={categories} items={items} />
+        <FeaturedBikes items={items} />
         <HowItWorks />
         <VideoFeature />
-        <PickupLocations />
+        <PickupLocations locations={locations} />
         <CabinBooking />
         <Testimonials />
         <CTABanner />
