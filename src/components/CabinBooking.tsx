@@ -1,3 +1,4 @@
+// TODO: Fetch cabin data from Renta API once cabin endpoints are built (v1.1)
 import Image from "next/image";
 
 export default function CabinBooking() {

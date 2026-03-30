@@ -2,70 +2,42 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { formatPrice } from "@/lib/format";
 
-const bikes = [
-  {
-    name: "Husqvarna TC250",
-    cc: "250cc",
-    level: "Intermediate",
-    price: "$230",
-    image: "https://www.alpmxadventures.com/media/1771389843_2023_Husqvarna_TC250.jpg",
-    alt: "2023 Husqvarna TC250 dirt bike side profile",
-    featured: true,
-    badge: "Most Popular",
-    category: "Intermediate",
-  },
-  {
-    name: "KTM 300SX",
-    cc: "300cc",
-    level: "Advanced",
-    price: "$240",
-    image: "https://www.alpmxadventures.com/media/1771390181_2023_KTM_300SX.png",
-    alt: "2023 KTM 300SX dirt bike side profile",
-    featured: true,
-    category: "Advanced",
-  },
-  {
-    name: "Honda CRF 250F",
-    cc: "250cc",
-    level: "Beginner",
-    price: "$180",
-    image: "https://www.alpmxadventures.com/media/1771390643_2020_Honda_CRF_250F.jpg",
-    alt: "2020 Honda CRF 250F dirt bike side profile",
-    category: "Beginner",
-  },
-  {
-    name: "Honda CRF 125F",
-    cc: "125cc",
-    level: "Beginner",
-    price: "$140",
-    image: "https://www.alpmxadventures.com/media/1771390891_2021_Honda_CRF_125F.jpg",
-    alt: "2021 Honda CRF 125F dirt bike side profile",
-    category: "Beginner",
-  },
-  {
-    name: "GasGas EX250",
-    cc: "250cc",
-    level: "Intermediate",
-    price: null,
-    image: "https://www.alpmxadventures.com/media/1771392134_2023_GASGAS_EX250.jpg",
-    alt: "2023 GasGas EX250 dirt bike side profile",
-    category: "Intermediate",
-  },
-];
+export interface FeaturedBikeItem {
+  fleet_item_id: string;
+  name: string;
+  slug: string;
+  category_id: string;
+  photo: string | null;
+  skill_level: string;
+  price: number;
+  deposit_amount: number;
+  rate_type: string;
+  available: boolean;
+  reason: string | null;
+}
 
-const filters = ["All", "Beginner", "Intermediate", "Advanced"];
+const filters = ["All", "Beginner", "Intermediate", "Advanced", "Expert"];
 
-export default function FeaturedBikes() {
+export default function FeaturedBikes({ items }: { items: FeaturedBikeItem[] }) {
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filtered = bikes.filter((b) => {
+  const filtered = items.filter((item) => {
     if (activeFilter === "All") return true;
-    return b.category === activeFilter;
+    return item.skill_level.toLowerCase() === activeFilter.toLowerCase();
   });
 
-  const featured = filtered.filter((b) => b.featured);
-  const rest = filtered.filter((b) => !b.featured);
+  // First two items are "featured" (large cards)
+  const featured = filtered.slice(0, 2);
+  const rest = filtered.slice(2);
+
+  // Only show filter tabs that have items
+  const activeFilters = filters.filter(
+    (f) =>
+      f === "All" ||
+      items.some((item) => item.skill_level.toLowerCase() === f.toLowerCase())
+  );
 
   return (
     <section id="rentals" className="bg-bg-light py-16 lg:py-24">
@@ -79,7 +51,7 @@ export default function FeaturedBikes() {
 
         {/* Filter Tabs */}
         <div className="flex gap-2 mb-10 overflow-x-auto pb-2">
-          {filters.map((f) => (
+          {activeFilters.map((f) => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
@@ -97,8 +69,8 @@ export default function FeaturedBikes() {
         {/* Featured Row */}
         {featured.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {featured.map((bike) => (
-              <BikeCard key={bike.name} bike={bike} large />
+            {featured.map((item) => (
+              <BikeCard key={item.fleet_item_id} item={item} large />
             ))}
           </div>
         )}
@@ -106,8 +78,8 @@ export default function FeaturedBikes() {
         {/* Rest */}
         {rest.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-            {rest.map((bike) => (
-              <BikeCard key={bike.name} bike={bike} />
+            {rest.map((item) => (
+              <BikeCard key={item.fleet_item_id} item={item} />
             ))}
           </div>
         )}
@@ -129,30 +101,59 @@ export default function FeaturedBikes() {
 }
 
 function BikeCard({
-  bike,
+  item,
   large,
 }: {
-  bike: (typeof bikes)[0];
+  item: FeaturedBikeItem;
   large?: boolean;
 }) {
+  const skillLabel =
+    item.skill_level.charAt(0).toUpperCase() + item.skill_level.slice(1);
+
   return (
     <div className="group bg-bg-white border-2 border-border rounded-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_48px_rgba(196,68,42,0.2)] hover:border-primary">
       {/* Image */}
-      <div className={`relative ${large ? "aspect-[4/3]" : "aspect-[4/3]"} bg-white p-4 lg:p-6 overflow-hidden`}>
-        {bike.badge && (
+      <div
+        className={`relative ${
+          large ? "aspect-[4/3]" : "aspect-[4/3]"
+        } bg-white p-4 lg:p-6 overflow-hidden`}
+      >
+        {large && (
           <span className="absolute top-4 left-4 z-10 bg-primary text-white font-heading text-[11px] font-semibold uppercase tracking-[0.06em] px-3 py-1.5 rounded-[4px]">
-            ★ {bike.badge}
+            ★ Featured
           </span>
         )}
         <div className="relative w-full h-full transition-transform duration-[400ms] ease-out group-hover:translate-x-2">
-          <Image
-            src={bike.image}
-            alt={bike.alt}
-            fill
-            className="object-contain"
-            loading="lazy"
-            sizes={large ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 33vw"}
-          />
+          {item.photo ? (
+            <Image
+              src={item.photo}
+              alt={item.name}
+              fill
+              className="object-contain"
+              loading="lazy"
+              sizes={
+                large
+                  ? "(max-width: 768px) 100vw, 50vw"
+                  : "(max-width: 768px) 100vw, 33vw"
+              }
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
+              <svg
+                className="w-16 h-16"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+          )}
         </div>
       </div>
 
@@ -163,17 +164,24 @@ function BikeCard({
             large ? "text-[22px]" : "text-lg"
           } text-bg-dark uppercase mb-2`}
         >
-          {bike.name}
+          {item.name}
         </h3>
         <p className="font-body text-sm text-text-secondary mb-3">
-          {bike.cc} • {bike.level}
+          {skillLabel}
         </p>
-        {bike.price ? (
+        {item.price > 0 ? (
           <p className="mb-4">
-            <span className={`font-heading font-bold ${large ? "text-2xl" : "text-xl"} text-bg-dark`}>
-              {bike.price}
+            <span
+              className={`font-heading font-bold ${
+                large ? "text-2xl" : "text-xl"
+              } text-bg-dark`}
+            >
+              {formatPrice(item.price)}
             </span>
-            <span className="font-body text-sm text-text-secondary"> /day</span>
+            <span className="font-body text-sm text-text-secondary">
+              {" "}
+              /day
+            </span>
           </p>
         ) : (
           <p className="font-body text-sm text-text-secondary mb-4">
@@ -186,7 +194,7 @@ function BikeCard({
             large ? "py-3.5" : "py-3"
           } rounded-[4px] hover:bg-primary transition-colors duration-200`}
         >
-          {bike.price ? "VIEW DETAILS" : "INQUIRE"}
+          {item.price > 0 ? "VIEW DETAILS" : "INQUIRE"}
         </a>
       </div>
     </div>
