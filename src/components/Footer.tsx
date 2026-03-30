@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const footerLinks = {
   Rentals: [
-    { label: "Dirt Bikes", href: "#" },
-    { label: "Trailers", href: "#" },
-    { label: "Gear", href: "#" },
+    { label: "Dirt Bikes", href: "#rentals" },
+    { label: "Trailers", href: "#rentals" },
+    { label: "Gear", href: "#rentals" },
   ],
   Company: [
     { label: "About Us", href: "#about" },
@@ -14,7 +14,7 @@ const footerLinks = {
   Contact: [
     { label: "385-236-8986", href: "tel:3852368986" },
     { label: "ride.alpmx@gmail.com", href: "mailto:ride.alpmx@gmail.com" },
-    { label: "Apple Valley, UT", href: "#" },
+    { label: "Apple Valley, UT", href: "#locations" },
   ],
 };
 
@@ -70,7 +70,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             {/* Instagram */}
             <a
-              href="#"
+              href="/"
               aria-label="Instagram"
               className="text-text-secondary hover:text-primary transition-colors duration-200"
             >
@@ -82,7 +82,7 @@ export default function Footer() {
             </a>
             {/* Facebook */}
             <a
-              href="#"
+              href="/"
               aria-label="Facebook"
               className="text-text-secondary hover:text-primary transition-colors duration-200"
             >
@@ -92,7 +92,7 @@ export default function Footer() {
             </a>
             {/* YouTube */}
             <a
-              href="#"
+              href="/"
               aria-label="YouTube"
               className="text-text-secondary hover:text-primary transition-colors duration-200"
             >

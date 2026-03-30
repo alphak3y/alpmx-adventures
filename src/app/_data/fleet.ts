@@ -1,16 +1,8 @@
 /**
- * Server-side data fetching using the storefront API.
- *
- * Uses direct fetch with the publishable key since the secret key
- * (RENTA_API_KEY) is not yet configured. The storefront endpoints
- * work with publishable keys for read operations.
- *
- * Once the secret key is available, this can be switched to use the
- * SDK's Renta class with renta.fleet.items.list() for richer data.
+ * Server-side data fetching using the Renta SDK storefront client.
  */
 
-const API_BASE = 'https://api.getrenta.io/v1';
-const API_KEY = process.env.NEXT_PUBLIC_RENTA_PK!;
+import { storefront } from '@/lib/renta-storefront';
 
 export interface StorefrontItem {
   fleet_item_id: string;
@@ -39,45 +31,30 @@ export interface PickupLocation {
   hours: Record<string, string>;
 }
 
-interface ShopProfile {
-  id: string;
-  slug: string;
-  name: string;
-  pickup_locations: PickupLocation[];
-}
-
 interface InventoryResult {
   items: StorefrontItem[];
   categories: StorefrontCategory[];
 }
 
 /**
- * Fetch inventory via the storefront endpoint.
+ * Fetch inventory via the SDK's storefront.inventory() method.
  * We use a far-future date range to get all available items.
  */
 export async function getInventory(): Promise<InventoryResult> {
   try {
-    // Use a date range far enough out to get all items
     const pickup = new Date();
     pickup.setDate(pickup.getDate() + 30);
     const returnDate = new Date(pickup);
     returnDate.setDate(returnDate.getDate() + 2);
 
-    const params = new URLSearchParams({
+    const data = await storefront.inventory({
       pickup_date: pickup.toISOString(),
       return_date: returnDate.toISOString(),
     });
 
-    const res = await fetch(`${API_BASE}/storefront/inventory?${params}`, {
-      headers: { Authorization: `Bearer ${API_KEY}` },
-      next: { revalidate: 300 },
-    });
-
-    if (!res.ok) return { items: [], categories: [] };
-    const data = await res.json();
     return {
-      items: data.items ?? [],
-      categories: data.categories ?? [],
+      items: (data.items ?? []) as StorefrontItem[],
+      categories: (data.categories ?? []) as StorefrontCategory[],
     };
   } catch {
     return { items: [], categories: [] };
@@ -85,17 +62,11 @@ export async function getInventory(): Promise<InventoryResult> {
 }
 
 /**
- * Fetch shop profile (includes pickup locations).
+ * Fetch shop profile via the SDK's storefront.shop() method.
  */
-export async function getShopProfile(): Promise<ShopProfile | null> {
+export async function getShopProfile() {
   try {
-    const res = await fetch(`${API_BASE}/storefront/shop`, {
-      headers: { Authorization: `Bearer ${API_KEY}` },
-      next: { revalidate: 300 },
-    });
-
-    if (!res.ok) return null;
-    return await res.json();
+    return await storefront.shop();
   } catch {
     return null;
   }
@@ -106,5 +77,5 @@ export async function getShopProfile(): Promise<ShopProfile | null> {
  */
 export async function getPickupLocations(): Promise<PickupLocation[]> {
   const shop = await getShopProfile();
-  return shop?.pickup_locations ?? [];
+  return (shop?.pickup_locations ?? []) as PickupLocation[];
 }

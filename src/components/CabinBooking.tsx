@@ -27,7 +27,7 @@ export default function CabinBooking() {
               Book our cabin and make it a weekend adventure. Located near Southern Utah&apos;s best trails, it&apos;s the perfect basecamp for a multi-day ride.
             </p>
             <a
-              href="#"
+              href="#cabin"
               className="inline-block bg-primary text-white font-heading font-semibold text-[15px] lg:text-base px-10 py-4 rounded-[4px] hover:bg-primary-hover transition-colors duration-200"
             >
               BOOK A CABIN →
