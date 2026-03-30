@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Home", href: "#" },
+  { label: "Home", href: "/" },
   { label: "Rentals", href: "#rentals" },
   { label: "Cabin", href: "#cabin" },
   { label: "About", href: "#about" },
@@ -42,7 +42,7 @@ export default function Navbar() {
     >
       <div className="max-w-[1200px] mx-auto px-5 sm:px-10 flex items-center justify-between h-16 lg:h-[72px]">
         {/* Logo */}
-        <a href="#" className="relative z-10 shrink-0">
+        <a href="/" className="relative z-10 shrink-0">
           <Image
             src="/images/logo.png"
             alt="AlpMX Adventures"

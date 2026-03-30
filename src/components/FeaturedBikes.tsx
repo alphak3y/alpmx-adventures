@@ -86,7 +86,7 @@ export default function FeaturedBikes({ items }: { items: FeaturedBikeItem[] }) 
 
         <div className="text-center">
           <a
-            href="#"
+            href="#rentals"
             className="inline-flex items-center gap-2 font-body text-base font-medium text-primary hover:underline group"
           >
             View All Rentals
@@ -189,7 +189,7 @@ function BikeCard({
           </p>
         )}
         <a
-          href="#"
+          href="#rentals"
           className={`block text-center bg-bg-dark text-white font-heading font-semibold text-[15px] ${
             large ? "py-3.5" : "py-3"
           } rounded-[4px] hover:bg-primary transition-colors duration-200`}
