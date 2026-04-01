@@ -22,6 +22,14 @@ export default async function Home() {
 
   const { items, categories } = inventory;
 
+  // Filter fleet to only show dirt bikes
+  const dirtBikeCategory = categories.find((c) =>
+    c.name.toLowerCase().includes("dirt")
+  );
+  const dirtBikeItems = dirtBikeCategory
+    ? items.filter((item) => item.category_id === dirtBikeCategory.id)
+    : items; // fallback to all items if no dirt bike category found
+
   return (
     <>
       <Navbar />
@@ -29,7 +37,7 @@ export default async function Home() {
         <Hero />
         <TrustBar />
         <RentalCategories categories={categories} items={items} />
-        <FeaturedBikes items={items} />
+        <FeaturedBikes items={dirtBikeItems} />
         <HowItWorks />
         <VideoFeature />
         <PickupLocations locations={locations} />
