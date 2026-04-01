@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const YOUTUBE_ID = "dQw4w9WgXcQ"; // Placeholder — replace with actual AlpMX video ID
+const YOUTUBE_ID = "Zv_I3f554p4";
 
 export default function VideoFeature() {
   const [playing, setPlaying] = useState(false);
@@ -12,7 +12,7 @@ export default function VideoFeature() {
     <section className="bg-bg-light py-16 lg:py-24">
       <div className="max-w-[900px] mx-auto px-5 sm:px-10">
         <h2 className="font-heading font-semibold text-[28px] lg:text-[44px] leading-tight text-text-primary uppercase tracking-[0.02em] mb-12 text-center">
-          See It In Action
+          See Us In Action
         </h2>
 
         <div
@@ -23,7 +23,7 @@ export default function VideoFeature() {
             <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0`}
+                src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0&start=35`}
                 title="AlpMX Adventures — Riding Utah"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
