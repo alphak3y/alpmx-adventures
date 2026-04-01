@@ -18,11 +18,7 @@ const locationImages: Record<
     alt: "Southern Utah pickup location with red rock scenery",
     mapUrl: "https://www.google.com/maps/search/Apple+Valley+UT+84737",
   },
-  "Northern Utah Pickup": {
-    image: "https://www.alpmxadventures.com/media/g2-2_1772521218.jpg",
-    alt: "Northern Utah pickup location",
-    mapUrl: "https://www.google.com/maps/search/Northern+Utah",
-  },
+
 };
 
 const defaultLocationImage = {
@@ -87,8 +83,8 @@ export default function PickupLocations({
         </h2>
         <p className="font-body text-base text-text-secondary mb-12">
           {locations.length > 0
-            ? `${locations.length} location${locations.length !== 1 ? "s" : ""} across Utah`
-            : "Two locations across Utah"}
+            ? `${locations.length} location${locations.length !== 1 ? "s" : ""} in Utah`
+            : "Located in Southern Utah"}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
