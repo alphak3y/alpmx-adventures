@@ -199,7 +199,7 @@ function BikeCard({
             large ? "py-3.5" : "py-3"
           } rounded-[4px] hover:bg-primary transition-colors duration-200`}
         >
-          {item.price > 0 ? "RENT NOW ↗" : "GET PRICING ↗"}
+          {item.price > 0 ? "RESERVE NOW ↗" : "GET PRICING ↗"}
         </a>
       </div>
     </div>
