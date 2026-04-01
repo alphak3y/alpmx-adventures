@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { rentaShopLink } from "@/lib/renta-links";
 
 const footerLinks = {
   Rentals: [
-    { label: "Dirt Bikes", href: "#rentals" },
-    { label: "Trailers", href: "#rentals" },
-    { label: "Gear", href: "#rentals" },
+    { label: "Dirt Bikes", href: rentaShopLink("footer", "dirt-bikes") },
+    { label: "Trailers", href: rentaShopLink("footer", "trailers") },
+    { label: "Gear", href: rentaShopLink("footer", "gear") },
   ],
   Company: [
     { label: "About Us", href: "#about" },
@@ -46,6 +47,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
+                      {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       className="font-body text-[15px] text-text-light/70 hover:text-text-light transition-colors duration-200"
                     >
                       {link.label}
