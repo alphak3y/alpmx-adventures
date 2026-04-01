@@ -86,7 +86,9 @@ export default function FeaturedBikes({ items }: { items: FeaturedBikeItem[] }) 
 
         <div className="text-center">
           <a
-            href="#rentals"
+            href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=view-all&utm_campaign=rentals"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-body text-base font-medium text-primary hover:underline group"
           >
             View All Rentals
@@ -189,7 +191,9 @@ function BikeCard({
           </p>
         )}
         <a
-          href="#rentals"
+          href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=bike-card&utm_campaign=view-details"
+          target="_blank"
+          rel="noopener noreferrer"
           className={`block text-center bg-bg-dark text-white font-heading font-semibold text-[15px] ${
             large ? "py-3.5" : "py-3"
           } rounded-[4px] hover:bg-primary transition-colors duration-200`}

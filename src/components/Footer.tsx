@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const footerLinks = {
   Rentals: [
-    { label: "Dirt Bikes", href: "#rentals" },
-    { label: "Trailers", href: "#rentals" },
-    { label: "Gear", href: "#rentals" },
+    { label: "Dirt Bikes", href: "https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=footer&utm_campaign=rentals" },
+    { label: "Trailers", href: "https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=footer&utm_campaign=rentals" },
+    { label: "Gear", href: "https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=footer&utm_campaign=rentals" },
   ],
   Company: [
     { label: "About Us", href: "#about" },
@@ -46,6 +46,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
+                      {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       className="font-body text-[15px] text-text-light/70 hover:text-text-light transition-colors duration-200"
                     >
                       {link.label}

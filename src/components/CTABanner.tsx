@@ -10,7 +10,9 @@ export default function CTABanner() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#rentals"
+            href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=cta-banner&utm_campaign=rentals"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-white text-primary font-heading font-semibold text-base px-10 py-4 rounded-[4px] hover:bg-bg-light transition-colors duration-200 w-full sm:w-auto text-center max-w-[320px]"
           >
             BOOK NOW

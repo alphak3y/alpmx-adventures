@@ -66,7 +66,9 @@ export default function RentalCategories({
             return (
               <a
                 key={cat.id}
-                href="#rentals"
+                href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=category-card&utm_campaign=rentals"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group bg-bg-dark-card rounded-md overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(0,0,0,0.3)]"
               >
                 <div className="relative aspect-[16/9] md:aspect-[4/3] overflow-hidden">
