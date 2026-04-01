@@ -1,3 +1,5 @@
+import { rentaShopLink } from "@/lib/renta-links";
+
 export default function CTABanner() {
   return (
     <section id="book" className="bg-primary py-12 lg:py-20">
@@ -10,7 +12,7 @@ export default function CTABanner() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=cta-banner&utm_campaign=rentals"
+            href={rentaShopLink("cta-banner")}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white text-primary font-heading font-semibold text-base px-10 py-4 rounded-[4px] hover:bg-bg-light transition-colors duration-200 w-full sm:w-auto text-center max-w-[320px]"

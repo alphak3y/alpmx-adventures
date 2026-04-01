@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { formatPrice } from "@/lib/format";
+import { rentaShopLink } from "@/lib/renta-links";
 
 export interface RentalCategory {
   id: string;
@@ -66,7 +67,7 @@ export default function RentalCategories({
             return (
               <a
                 key={cat.id}
-                href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=category-card&utm_campaign=rentals"
+                href={rentaShopLink("category-card")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group bg-bg-dark-card rounded-md overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(0,0,0,0.3)]"

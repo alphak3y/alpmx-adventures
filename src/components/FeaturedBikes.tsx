@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { formatPrice } from "@/lib/format";
+import { rentaShopLink } from "@/lib/renta-links";
 
 export interface FeaturedBikeItem {
   fleet_item_id: string;
@@ -86,7 +87,7 @@ export default function FeaturedBikes({ items }: { items: FeaturedBikeItem[] }) 
 
         <div className="text-center">
           <a
-            href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=view-all&utm_campaign=rentals"
+            href={rentaShopLink("view-all")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-body text-base font-medium text-primary hover:underline group"
@@ -191,7 +192,7 @@ function BikeCard({
           </p>
         )}
         <a
-          href="https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=bike-card&utm_campaign=view-details"
+          href={rentaShopLink("bike-card")}
           target="_blank"
           rel="noopener noreferrer"
           className={`block text-center bg-bg-dark text-white font-heading font-semibold text-[15px] ${

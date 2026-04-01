@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { rentaShopLink } from "@/lib/renta-links";
 
 const footerLinks = {
   Rentals: [
-    { label: "Dirt Bikes", href: "https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=footer&utm_campaign=rentals" },
-    { label: "Trailers", href: "https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=footer&utm_campaign=rentals" },
-    { label: "Gear", href: "https://getrenta.io/shops/alpmx-test?utm_source=alpmx-site&utm_medium=footer&utm_campaign=rentals" },
+    { label: "Dirt Bikes", href: rentaShopLink("footer", "dirt-bikes") },
+    { label: "Trailers", href: rentaShopLink("footer", "trailers") },
+    { label: "Gear", href: rentaShopLink("footer", "gear") },
   ],
   Company: [
     { label: "About Us", href: "#about" },
